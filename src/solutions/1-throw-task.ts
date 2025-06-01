@@ -1,11 +1,12 @@
 
 async function functionThrow() {
-    throw new Error("Function throw!");
+    throw new Error("Function dont throw!");
 }
 
 // Есть код с ошибкой:
 async () => {
     while (true) {
+        console.log("Код с ошибкой")
         await functionThrow();
     }
 };
@@ -22,7 +23,7 @@ try {
     })();
 
 } catch (error) {
-    console.log(error);
+    console.log("1", error);
 }
 
 // 2 вариант:
@@ -36,21 +37,21 @@ try {
         }
 
     } catch (error) {
-        console.log(error);
+        console.log("2", error);
     }
 
 })();
 
 // 3 вариант:
 
-(async () => {
-    while (true) {
+// (async () => {
+//     while (true) {
 
-        try {
-            await functionThrow();
-        } catch (error) {
-            console.log(error);
-        }
+//         try {
+//             await functionThrow();
+//         } catch (error) {
+//             console.log("3", error);
+//         }
 
-    }
-})();
+//     }
+// })();
