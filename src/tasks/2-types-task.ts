@@ -32,6 +32,9 @@ class Book {
 }
 
 function New(newlable: any, params: unknown[]): unknown {
+    if (typeof params !== 'object') {
+        throw new Error('Types of params is not a object!')
+    }
     return new newlable(...params);
 }
 
