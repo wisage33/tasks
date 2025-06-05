@@ -23,6 +23,7 @@ class Server {
             switch (whom) {
                 case WhomEnum.Self:
                     if(user === _user) {
+                        console.log("send himself")
                         socket.send(_user)
                     }
                     break
@@ -42,3 +43,8 @@ class Server {
     }
 
 }
+
+const server = new Server();
+const user1 = new User();
+const user2 = new User();
+server.send(WhomEnum.Self, user1)

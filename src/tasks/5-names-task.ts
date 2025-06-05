@@ -4,34 +4,34 @@
 
 type Callback<T> = (event: T) => void;
 
-class E<T> {
-  private ss = new Set<Callback<T>>();
+class Publisher<T> {
+  private subscribers = new Set<Callback<T>>();
 
-  s(c: Callback<T>) {
-    this.ss.add(c);
+  subscribe(c: Callback<T>) {
+    this.subscribers.add(c);
 
     return c;
   }
 
-  u(c: Callback<T>) {
-    return this.ss.delete(c);
+  unsubscribe(c: Callback<T>) {
+    return this.subscribers.delete(c);
   }
 
-  e(v: T) {
-    for (const s of this.ss) {
-      s(v);
+  deliver(message: T) {
+    for (const subscribe of this.subscribers) {
+      subscribe(message);
     }
   }
 }
 
-const e = new E<number>();
+const publisher = new Publisher<number>();
 
-const s = e.s((v) => {
-  console.log(v);
+const subscribe = publisher.subscribe((message) => {
+  console.log(message);
 });
 
-e.e(5);
+publisher.deliver(5);
 
-e.u(s);
+publisher.unsubscribe(subscribe);
 
-e.e(10);
+publisher.deliver(10);
