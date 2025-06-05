@@ -20,14 +20,25 @@ class Server {
 
     send(whom: WhomEnum, user?: User): void {
         for(const _user of this.users) {
-            if (
-                (whom === WhomEnum.Self && user === _user)
-                ||
-                (whom === WhomEnum.Other && _user !== user)
-                ||
-                (whom === WhomEnum.All)
-            ) {
-                socket.send(_user);
+            switch (whom) {
+                case WhomEnum.Self:
+                    if(user === _user) {
+                        socket.send(_user)
+                    }
+                    break
+                case WhomEnum.Other:
+                    if(user !== _user) {
+                        socket.send(_user)
+                    }
+                    break
+                case WhomEnum.All:
+                    if(user !== _user) {
+                        socket.send(_user)
+                    }
+                    break
+                default:
+                    throw new Error("Пользователь не существует")
+                    break
             }
         }
     }
