@@ -32,9 +32,7 @@ class Server {
                     }
                     break
                 case WhomEnum.All:
-                    if(user !== _user) {
-                        socket.send(_user)
-                    }
+                    socket.send(_user)
                     break
                 default:
                     throw new Error("Пользователь не существует")
