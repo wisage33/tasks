@@ -10,8 +10,16 @@
   "author": "",
   "license": "ISC",
   "keywords": [],
-  "description": "",
   "dependencies": {
     "typescript": "^5.8.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wisage33/tasks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wisage33/tasks/issues"
+  },
+  "homepage": "https://github.com/wisage33/tasks#readme",
+  "description": ""
 }
