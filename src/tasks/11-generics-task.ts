@@ -1,29 +1,29 @@
-class Sort {
-    constructor(private _elements: any[]) {}
+class Sort<T> {
+    constructor(private _elements: T[]) {}
 
-    get elements() {
+    get elements(): T[] {
         return this._elements;
     }
 
     // Метод сортировки с кастомной функцией сравнения
-    sortBy(compareFn: (a: any, b: any) => number) {
+    sortBy(compareFn: (a: T, b: T) => number) {
         return new Sort([...this._elements].sort(compareFn));
     }
 
     // Метод для трансформации элементов (изменяет тип данных)
-    mapElements(callback: (el: any) => any) {
+    mapElements<U>(callback: (el: T) => U): Sort<U> {
         return new Sort(this._elements.map(callback));
     }
 }
 
-class Method {
-    constructor(private _sort: Sort) {}
+class Method<T> {
+    constructor(private _sort: Sort<T>) {}
 
-    get sort() {
+    get sort(): Sort<T> {
         return this._sort;
     }
 
-    transform(callback: (el: any) => any) {
+    transform<U>(callback: (el: T) => U): Method<U> {
         return new Method(this._sort.mapElements(callback));
     }
 }
