@@ -1,5 +1,5 @@
 
-class Ref<T> {
+class Ref {
     constructor(readonly id: number) {}
 }
 
@@ -7,7 +7,7 @@ class User {
     constructor(
         readonly id: number, 
         readonly name: string, 
-        readonly productsId: Ref<Product>,
+        readonly productsId: number[]
     ) {}
 }
 
@@ -34,4 +34,20 @@ const products = [
     new Product(6, 'product6', 600), 
 ];
 
+function References() {
+    const productsArray = new Map(products.map(product => [product.id, product]))
+
+    return users.map((user: User) => {
+        const refs: Ref[] = user.productsId.map((id: number) => new Ref(id))
+
+        const userProducts = refs
+            .map(ref => productsArray.get(ref.id))
+            .filter(product => product !== undefined)
+
+        return {
+            user,
+            products: userProducts
+        }
+    })
+}
 // Требуется написать функцию, которая возвращает новый массив, выполняя агрегацию, в котором вместо id продуктов будут сами продукты:
