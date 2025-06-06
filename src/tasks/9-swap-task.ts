@@ -11,12 +11,21 @@ class Numbers {
 
     // Реализовать функцию: Меняет местами элементы с индексами index1 и index2
     swap(index1: number, index2: number) {
-        
+        const temp = this._array[index1];
+        this._array[index1] = this._array[index2];
+        this._array[index2] = temp;
+        return this;
     }
 
     // Реализовать функцию: Сортирует массив в порядке возрастания
     sort(): void {
-        
+        for(let i = 0; i < this._array.length; i++) {
+            for(let j = 0; j < this._array.length - i; j++) {
+                if(this._array[j] > this._array[j + 1]) {
+                    [this._array[j], this._array[j + 1]] = [this._array[j + 1], this._array[j]]
+                }
+            }
+        }
     }
 }
 
