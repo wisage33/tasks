@@ -16,16 +16,13 @@ class User {
         readonly country: Country,
     ) {}
 
-    parseCountry(country: { name: string } ) {
-        return country.name;
+    static parseCountry(country: { name: string } ) {
+        return new Country(country.name);
     }
 
-    static fromObject(obj: User): User {
-        this.name = obj.name;
-        this.age = obj.age;
-        this.country = this.parseCountry(obj.country);
-
-        return this;
+    static fromObject(obj: { name: string, age: number, country: {name: string, code: number}}): User {
+        const country = User.parseCountry(obj.country);
+        return new User(obj.name, obj.age, country);
     }
 }
 
