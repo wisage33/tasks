@@ -22,7 +22,7 @@ class Numbers {
         for(let i = 0; i < this._array.length; i++) {
             for(let j = 0; j < this._array.length - i; j++) {
                 if(this._array[j] > this._array[j + 1]) {
-                    [this._array[j], this._array[j + 1]] = [this._array[j + 1], this._array[j]]
+                    this.swap(j, j + 1)
                 }
             }
         }
