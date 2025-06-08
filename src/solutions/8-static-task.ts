@@ -2,10 +2,10 @@
 // Сделать рабочим - поправить ошибки ниже:
 
 class Country {
-    constructor(readonly name: string) {}
+    constructor(readonly name: string, readonly code: number) {}
 
-    get code () {
-        return 643;
+    static parseCountry(country: { name: string, code: number } ) {
+        return new Country(country.name, country.code);
     }
 }
 
@@ -16,12 +16,8 @@ class User {
         readonly country: Country,
     ) {}
 
-    static parseCountry(country: { name: string } ) {
-        return new Country(country.name);
-    }
-
     static fromObject(obj: { name: string, age: number, country: {name: string, code: number}}): User {
-        const country = User.parseCountry(obj.country);
+        const country = Country.parseCountry(obj.country)
         return new User(obj.name, obj.age, country);
     }
 }
