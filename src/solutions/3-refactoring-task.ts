@@ -20,10 +20,10 @@ class Server {
 
     send(whom: WhomEnum, user?: User): void {
         for(const _user of this.users) {
+            
             switch (whom) {
                 case WhomEnum.Self:
                     if(user === _user) {
-                        console.log("send himself")
                         socket.send(_user)
                     }
                     break
