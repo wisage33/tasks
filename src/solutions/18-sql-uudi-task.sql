@@ -20,3 +20,5 @@ CREATE TABLE users (
     uuid UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
+
+SELECT * FROM users WHERE uuid = "UUID = ?" ORDER BY uuid LIMIT 100;
