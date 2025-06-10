@@ -9,7 +9,31 @@ stack - возвращает стек
 */
 
 class SumStack {
-    // Реализуйте этот класс
+    private _stack: number[] = []
+
+    constructor(array: number[] = []) {
+        this._stack = array
+    }
+
+    push(value: number) {
+        this._stack.push(value)
+    }
+
+    pop() {
+        return this._stack.pop()
+    }
+
+    // sum() {
+    //     return this._stack.reduce((acc, val) => acc + val, 0)
+    // } тк в коде ниже используется написал и геттер тоже, не знаю какой вариант ожидаешь
+
+    get sum() {
+        return this._stack.reduce((acc, val) => acc + val, 0)
+    }
+
+    get stack() {
+        return [...this._stack]
+    }
 }
 
 // Ниже код менять не нужно
