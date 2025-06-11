@@ -101,10 +101,15 @@ Input: 0123 => { bull: 4, cow: 0 }
 
 class Bot {
   public guess = Game.generateInput();
+  public possibleNumbers: Input[];
+
+  constructor() {
+    this.possibleNumbers = Game.getInputs()
+  }
 
   input(bc: BullCow): Input { // Писать алгоритм внутри тела метода - ЗДЕСЬ!
     this.guess = Game.generateInput();
-
+    // console.log(this.guess)
     return this.guess;
   }
 }
