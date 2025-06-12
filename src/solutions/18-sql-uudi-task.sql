@@ -21,4 +21,4 @@ CREATE TABLE users (
     name VARCHAR(255) NOT NULL
 );
 
-SELECT * FROM users WHERE uuid = "UUID = ?" ORDER BY uuid LIMIT 100;
+SELECT name FROM users WHERE uuid > ? ORDER BY uuid LIMIT 100;

@@ -1,6 +1,9 @@
 
 // Сделать рабочим - поправить ошибки ниже:
 
+type CountryDTO = {name: string, code: number};
+type UserDTO = {name: string, age: number, country: CountryDTO}
+
 class Country {
     constructor(readonly name: string, readonly code: number) {}
 
@@ -16,7 +19,7 @@ class User {
         readonly country: Country,
     ) {}
 
-    static fromObject(obj: { name: string, age: number, country: {name: string, code: number}}): User {
+    static fromObject(obj: UserDTO): User {
         const country = Country.parseCountry(obj.country)
         return new User(obj.name, obj.age, country);
     }
@@ -31,3 +34,5 @@ const user = User.fromObject({
         code: 643
     }
 });
+
+console.log(user)

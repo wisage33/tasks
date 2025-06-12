@@ -1,4 +1,3 @@
-
 class User {
     readonly name: string; 
     readonly age: number;
@@ -31,8 +30,11 @@ class Book {
     }
 }
 
-function New<T>(ctor: new(...params: any[]) => T, ...params: any[]): T {
-    return new ctor(...params[0]);
+function New(newlable: typeof User, params: ConstructorParameters<typeof User>): User;
+function New(newlable: typeof Book, params: ConstructorParameters<typeof Book>): Book;
+
+function New<T extends new (...params: any[]) => any>(newlable: T, params: ConstructorParameters<T>): InstanceType<T> {
+    return new newlable(...params);
 }
 
 // Реализуйте данное поведение функции New:
