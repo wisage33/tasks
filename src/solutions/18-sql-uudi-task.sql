@@ -17,8 +17,9 @@ UUID-100000000  | name-100000000
 */
 
 CREATE TABLE users (
+    id AUTO_INCREMENT,
     uuid UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
-SELECT name FROM users WHERE uuid > ? ORDER BY uuid LIMIT 100;
+SELECT name FROM users WHERE id > (SELECT id FROM users WHERE uuid = ?) ORDER BY id LIMIT 100;
