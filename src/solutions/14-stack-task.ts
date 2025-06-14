@@ -9,56 +9,66 @@
 console.clear();
 
 class MaxStack {
-    public stack: number[] = []
-    public maxStack: number[] = []
 
-    constructor(initialStack: number[] = []) {
-        initialStack.forEach(el => this.push(el))
+    readonly _stack: number[] = [];
+    readonly _maxStack: number[] = [];
+
+
+    constructor(stack: number[]) {
+        for (let item of stack) {
+            this.push(item);
+        };
+    };
+
+    get stack(): number[] {
+        return [...this._stack];
+    };
+
+    get count(): number {
+        return this._stack.length;
+    }
+
+    get max() {
+        return this._maxStack[this._maxStack.length - 1];
     }
 
     push(value: number) {
-        this.stack.push(value)
-
-        if(this.maxStack.length === 0 || value >= this.maxStack[this.maxStack.length - 1]) {
-            this.maxStack.push(value)
-        }
-    }
+        this._stack.push(value);
+        if(this._maxStack.length === 0 || value >= this._maxStack[this._maxStack.length - 1]) {
+            this._maxStack.push(value);
+        };
+    };
 
     pop() {
-        if (this.stack.length === 0) return undefined
-
-        const popped = this.stack.pop()
-
-        if(popped === this.maxStack[this.maxStack.length - 1]) {
-            this.maxStack.pop()
+        if(this._stack.length === 0) {
+            return undefined;
         }
 
-        return popped
-    }
+        const popped = this._stack.pop();
 
-    max() {
-        if(this.maxStack.length === 0) {
-            return undefined
-        }
+        if(popped === this._maxStack[this._maxStack.length - 1]) {
+            this._maxStack.pop();
+        };
 
-        return this.maxStack[this.maxStack.length - 1]
-    }
+        return popped;
+    };
+
 }
 
 const maxStack = new MaxStack([1, 3, 5]);
-
 maxStack.push(4);
 
-// maxStack.stack[0] = 10;
+maxStack.stack[0] = 10;
 
 maxStack.push(2);
 
 console.log(maxStack.stack);
 
-const count = maxStack.maxStack.length + 1;
-for(let i = 0; i < count + 1; i++) {
-    console.log(`Max: ${maxStack.max()}, Pop: ${maxStack.pop()}`);
+const count = maxStack.count;
+for(let i = 0; i < count; i++) {
+    console.log(`Max: ${maxStack.max}, Pop: ${maxStack.pop()}`);
 }
+
 /*
 [ 1, 3, 5, 4, 2 ]
 Max: 5, Pop: 2
