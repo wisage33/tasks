@@ -17,15 +17,10 @@ class BigData {
         }
     }
 
-    private *generator(): Generator<number> {
+    public *generator(): Generator<number> {
         for(const item of this.data) {
             yield item;
         }
-    }
-
-    getNext(): IteratorResult<number, number> {
-        let iterator = this.generator();
-        return iterator.next();
     }
 }
 
@@ -34,6 +29,5 @@ const bigData = new BigData();
 // for(const items of bigData) {
 //     console.log(items);
 // }
-let i = 0;
 
-console.log(bigData.getNext())
+console.log(bigData.generator())

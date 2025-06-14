@@ -23,4 +23,4 @@ class Server {
 const server = new Server();
 const user1 = new User();
 const user2 = new User();
-server.send(user1)
+server.send([user1, user2])
