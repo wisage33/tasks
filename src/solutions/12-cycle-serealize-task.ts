@@ -1,4 +1,3 @@
-
 type Nullable<T> = T | null;
 
 class User {
@@ -95,9 +94,10 @@ user.addOrder(order1);
 // Доработать функцию так, чтобы обход не был рекурсивным...
 
 function traverseObject(obj: any, callback: (key: string, value: any) => void) {
-    if (obj === null || typeof obj !== 'object') {
-        return;
-    }
+    if (obj === null || typeof obj !== 'object') return;
+
+    const visited = new Map();
+    const path: any[] = [];
 
     const stack = [obj];
   
@@ -106,8 +106,28 @@ function traverseObject(obj: any, callback: (key: string, value: any) => void) {
   
       for (const key in currentObj) {
         if (currentObj.hasOwnProperty(key)) {
+
           const value = currentObj[key];
           callback(key, value);
+
+          const cycleIndex = path.indexOf(currentObj);
+          if(path.includes(value)) {
+            console.log(value)
+
+            const pathToCycle = path.splice(path.indexOf(value)).map(item => item.constructor?.name).join(" -> ");
+
+            console.log("--------")
+
+            console.log(pathToCycle, "\n");
+
+            console.log("-------");
+
+            path.push(value)
+            continue;
+          }
+
+          path.push(currentObj);
+          visited.set(currentObj, true);
   
           if (typeof value === 'object' && value !== null) {
             stack.push(value);
